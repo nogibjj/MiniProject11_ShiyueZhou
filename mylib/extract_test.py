@@ -1,3 +1,5 @@
+# Databricks notebook source
+
 from pyspark.sql import SparkSession,DataFrame
 from pyspark.sql.functions import when, col
 import pandas as pd
@@ -11,7 +13,13 @@ def extract_spark():
     spark_df.write.format("delta").mode("append").saveAsTable("grade_student_delta")
     
     return file_path
-     
+extract_spark()
+
+# COMMAND ----------
+
+spark.sql("SELECT * FROM grade_student_delta LIMIT 2").show()
+
+# COMMAND ----------
 
 
 def data_transform(table="grade_student_delta"):
@@ -50,6 +58,13 @@ def data_transform(table="grade_student_delta"):
     return sparktable.columns
 
 
+
+# COMMAND ----------
+
+data_transform(table="grade_student_delta")
+
+# COMMAND ----------
+
 def load_sql(table="grade_student_delta"):
     spark = SparkSession.builder.appName("grade_student").getOrCreate()
     
@@ -84,20 +99,15 @@ def load_sql(table="grade_student_delta"):
 
 
 
+# COMMAND ----------
 
-if __name__ == "__main__":
-    extract_spark()
-    data_transform(table="grade_student_delta")
-    # Execute the function and display results
-    query_result=load_sql(table="grade_student_delta")
-    query_result.show()
+# Execute the function and display results
+query_result=load_sql(table="grade_student_delta")
+query_result.show()
 
-   
-    
+# COMMAND ----------
 
-    
-    
-    
-    
-
-    
+with open("sample_query.sql", "r")as file:
+  sql_query=file.read()
+  query_result=spark.sql(sql_query)
+  query_result.show()
