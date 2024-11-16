@@ -1,4 +1,4 @@
-from pyspark.sql import SparkSession,DataFrame
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import when, col
 import pandas as pd
 def extract_spark():
@@ -80,8 +80,6 @@ def load_sql(table="grade_student_delta"):
     except Exception as e:
         print(f"Error executing SQL query: {e}")
         return None
-
-
 
 
 

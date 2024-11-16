@@ -26,7 +26,8 @@
 #     # Convert Pandas DataFrame to Spark DataFrame
 #     spark_df = spark.createDataFrame(df)
     
-#     # To avoid mismatch between the schema of the existing Delta table and the DataFrame I am trying to append
+#     # To avoid mismatch between the schema of the existing 
+#     # Delta table and the DataFrame I am trying to append
 #     spark.sql("DROP TABLE IF EXISTS grade_student_delta")
 #     # Write to Delta table (no need for explicit directory creation)
 #     spark_df.write.format("delta").mode("append").saveAsTable("grade_student_delta")
@@ -61,7 +62,8 @@
 #     spark.sql("DROP TABLE IF EXISTS grade_student_delta")
 
 #     # Write the Spark DataFrame to a Delta table
-#     spark_df.write.format("delta").mode("overwrite").saveAsTable("grade_student_delta")
+#     spark_df.write.format("delta").
+#     mode("overwrite").saveAsTable("grade_student_delta")
 #     print("Data successfully written to Delta table 'grade_student_delta'")
 
 #     if spark.catalog.tableExists("grade_student_delta"):
